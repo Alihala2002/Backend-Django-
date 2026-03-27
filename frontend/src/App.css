@@ -12,7 +12,7 @@
 body {
   margin: 0;
   background-color: var(--bg-dark);
-  color: var(--text-white);
+  color: var(--text-white) !important;
   font-family: 'Inter', sans-serif;
   overflow-x: hidden;
   line-height: 1.6;
@@ -47,90 +47,51 @@ body {
 .name {
   font-family: 'Poppins';
   font-size: clamp(40px, 8vw, 70px);
+  color: var(--text-white) !important;
   margin: 0;
 }
 
-/* سطر المعلومات (Software Engineer | Hebron) */
 .hero-info-line {
   display: flex;
   justify-content: center;
   gap: 25px;
-  margin: 10px 0;
+  margin: 15px 0;
   font-size: 1rem;
   font-weight: 600;
-  letter-spacing: 1.5px;
-  color: var(--cyan);
-}
-
-.hero-info-line span {
-  display: flex;
-  align-items: center;
-  gap: 8px;
+  color: var(--cyan) !important;
 }
 
 .subtitle {
   font-size: 1.2rem;
-  color: var(--text-slate);
-  margin-bottom: 15px;
-}
-
-/* سطر الإيميل تحت الوصف */
-.hero-email-line {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  margin-top: 10px;
-  font-size: 1.1rem;
+  color: var(--text-slate) !important;
 }
 
 .email-link {
-  color: var(--cyan);
+  color: var(--cyan) !important;
   text-decoration: none;
   font-weight: 600;
-  transition: 0.3s;
-}
-
-.email-link:hover {
-  text-decoration: underline;
-  opacity: 0.8;
-}
-
-.social-links {
-  display: flex;
-  gap: 25px;
-  font-size: 1.8rem;
-  margin-top: 25px;
 }
 
 .social-links a {
-  color: var(--text-slate);
+  color: var(--text-slate) !important;
+  font-size: 1.8rem;
   transition: 0.3s;
 }
 
 .social-links a:hover {
-  color: var(--cyan);
+  color: var(--cyan) !important;
   transform: translateY(-5px);
 }
 
-/* 2. Common Section Styles */
-.section-container {
-  margin: 80px 0;
-}
-
+/* 2. Section Styles (Fixed Black Title Problem) */
 .section-title {
   font-family: 'Poppins';
   font-size: 1.8rem;
   border-left: 5px solid var(--cyan);
   padding-left: 15px;
-  margin-bottom: 30px;
+  margin: 60px 0 30px;
   text-transform: uppercase;
-  display: flex;
-  align-items: center;
-}
-
-.title-icon {
-  margin-right: 12px;
+  color: var(--text-white) !important; /* فرض اللون الأبيض */
 }
 
 /* 3. Cards & Projects */
@@ -139,44 +100,24 @@ body {
   padding: 30px;
   border-radius: 12px;
   border: 1px solid rgba(100, 255, 218, 0.1);
-  transition: 0.3s ease;
-}
-
-.glass-card:hover {
-  border-color: var(--cyan);
-  transform: translateY(-5px);
-}
-
-.projects-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 25px;
 }
 
 .project-card h3 {
-  color: var(--text-white);
-  margin: 15px 0;
+  color: var(--text-white) !important;
+  margin-bottom: 15px;
 }
 
-.project-icon {
-  font-size: 2.2rem;
-  color: var(--cyan);
-}
-
-/* تنسيق قائمة نقاط مشروع اليوتيوب */
 .project-yt-description ul {
   padding-left: 20px;
-  margin-top: 15px;
-  color: var(--text-slate);
-  font-size: 0.95rem;
+  color: var(--text-slate) !important;
 }
 
 .project-yt-description li {
-  margin-bottom: 10px;
+  margin-bottom: 8px;
   list-style-type: disc;
 }
 
-/* 4. Skills Grid */
+/* 4. Skills */
 .skills-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -184,72 +125,19 @@ body {
 }
 
 .skill-block h3 {
+  color: var(--cyan) !important;
   font-size: 1.1rem;
-  color: var(--cyan);
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 10px;
 }
 
-.skill-block p {
-  color: var(--text-slate);
-  margin: 0;
-}
-
-/* 5. Education */
-.education-card {
-  display: flex;
-  align-items: center;
-  gap: 25px;
-}
-
-.edu-icon {
-  font-size: 2.5rem;
-  color: var(--cyan);
-}
-
-.edu-info h3 {
-  margin: 0;
-  color: var(--text-white);
-}
-
-.edu-info p {
-  color: var(--text-slate);
-  margin: 5px 0 0;
-}
-
-/* 6. Footer & Loading */
+/* 5. Footer */
 .minimal-footer {
   text-align: center;
-  padding: 60px 0;
-  color: var(--text-slate);
+  padding: 50px 0;
+  color: var(--text-slate) !important;
   font-size: 0.85rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-.loading {
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: var(--bg-dark);
-  color: var(--cyan);
-  font-size: 1.5rem;
-  font-family: 'Poppins';
-}
-
-/* 7. Responsive Design */
 @media (max-width: 768px) {
-  .hero-info-line {
-    flex-direction: column;
-    gap: 10px;
-  }
-  .name {
-    font-size: 3rem;
-  }
-  .education-card {
-    flex-direction: column;
-    text-align: center;
-  }
+  .hero-info-line { flex-direction: column; gap: 10px; }
+  .name { font-size: 3rem; }
 }
