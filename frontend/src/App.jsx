@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { motion } from 'framer-motion';
+// تم إضافة أيقونة FaEnvelope هنا لاستخدامها في قسم الإيميل
 import { 
   FaYoutube, FaGithub, FaLinkedin, FaGraduationCap, 
   FaMapMarkerAlt, FaCalendarAlt, FaCode, FaTools, FaDatabase, 
-  FaLayerGroup, FaVideo, FaChartLine, FaPaintBrush, FaComments, FaBolt, FaBriefcase 
+  FaLayerGroup, FaVideo, FaChartLine, FaPaintBrush, FaComments, FaBolt, FaBriefcase, FaEnvelope 
 } from 'react-icons/fa';
 import profileImg from './assets/ali_profile.jpeg';
 import './App.css';
@@ -13,17 +14,18 @@ function App() {
   const [data, setData] = useState(null);
 
   useEffect(() => {
-  // أضف /api/profile/ في نهاية الرابط
-  axios.get('https://backend-django-ovk4.vercel.app/api/profile/') 
-    .then(res => setData(res.data))
-    .catch(err => console.log("Check if Django is running!", err));
-}, []);
+    // تم استخدام رابط الـ Backend الصحيح كما تأكدنا في الصور السابقة لضمان جلب البيانات
+    axios.get('https://backend-django-ovk4.vercel.app/api/profile/')
+      .then(res => setData(res.data))
+      .catch(err => console.log("Check if Django is running!", err));
+  }, []);
 
+  // تظل حالة الـ Loading ظاهرة حتى يتم الاتصال بالـ API بنجاح
   if (!data) return <div className="loading">Loading Ali's Portfolio...</div>;
 
   return (
     <div className="portfolio-container">
-      {/* 1. Hero Section */}
+      {/* 1. Hero Section - تم تعديله ليظهر الإيميل بشكل احترافي */}
       <motion.section initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="hero">
         <div className="profile-wrapper">
           <img src={profileImg} alt="Ali Halayqa" className="profile-pic" />
@@ -31,13 +33,21 @@ function App() {
         <div className="hero-typography">
           <h1 className="name">{data.name}</h1>
           
-          {/* السطر الجديد: المسمى الوظيفي والموقع الجغرافي باللون الفسفوري */}
+          {/* قسم الموقع والمسمى الوظيفي */}
           <div className="hero-info-line">
             <span><FaBriefcase className="info-icon" /> BACKEND ENGINEER</span>
             <span><FaMapMarkerAlt className="info-icon" /> HEBRON</span>
           </div>
 
           <p className="subtitle">{data.title}</p>
+
+          {/* التعديل الجديد: إضافة أيقونة الإيميل وإيميلك مباشرة أسفل الوصف */}
+          <div className="hero-email-line">
+            <FaEnvelope className="info-icon" />
+            <a href="mailto:ali2002hala@gmail.com" className="email-link">
+              ali2002hala@gmail.com
+            </a>
+          </div>
         </div>
         <div className="social-links">
           <a href={data.links.github} target="_blank" rel="noreferrer"><FaGithub /></a>
@@ -45,6 +55,8 @@ function App() {
           <a href={data.links.youtube} target="_blank" rel="noreferrer"><FaYoutube /></a>
         </div>
       </motion.section>
+
+      {/* بقية الأقسام تظل كما هي لضمان عدم حدوث أي تغييرات غير مقصودة في بقية الموقع */}
 
       {/* 2. Professional Summary */}
       <section className="summary-section">
@@ -114,9 +126,7 @@ function App() {
         </div>
       </section>
 
-      <footer className="footer">
-        <p>© 2026 Ali Halayqa | Computer Engineer</p>
-      </footer>
+      {/* التعديل الجديد: تم حذف قسم الـ Footer (سطر الحقوق) بالكامل */}
     </div>
   );
 }
