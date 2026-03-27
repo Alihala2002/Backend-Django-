@@ -26,7 +26,7 @@ body {
 
 /* 1. Hero Section */
 .hero {
-  min-height: 70vh;
+  min-height: 80vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -64,52 +64,92 @@ body {
 .subtitle {
   font-size: 1.2rem;
   color: var(--text-slate) !important;
+  max-width: 600px;
+}
+
+/* تنسيق الإيميل الجديد */
+.hero-email-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 20px;
+  background: var(--cyan-dim);
+  padding: 10px 20px;
+  border-radius: 50px;
+  border: 1px solid rgba(100, 255, 218, 0.2);
+}
+
+.email-icon-large {
+  font-size: 1.5rem; /* حجم أكبر للأيقونة */
+  color: var(--cyan);
 }
 
 .email-link {
   color: var(--cyan) !important;
   text-decoration: none;
   font-weight: 600;
+  font-size: 1.1rem;
 }
 
-.social-links a {
+/* تنسيق أيقونات السوشيال مع مسافات */
+.social-links-container {
+  display: flex;
+  gap: 35px; /* مسافة كافية للترتيب */
+  margin-top: 30px;
+}
+
+.social-icon {
   color: var(--text-slate) !important;
-  font-size: 1.8rem;
-  transition: 0.3s;
+  font-size: 2rem;
+  transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.social-links a:hover {
+.social-icon:hover {
   color: var(--cyan) !important;
   transform: translateY(-5px);
 }
 
-/* 2. Section Styles (Fixed Black Title Problem) */
+/* 2. Section Styles */
 .section-title {
   font-family: 'Poppins';
   font-size: 1.8rem;
   border-left: 5px solid var(--cyan);
   padding-left: 15px;
-  margin: 60px 0 30px;
+  margin: 80px 0 30px;
   text-transform: uppercase;
-  color: var(--text-white) !important; /* فرض اللون الأبيض */
+  color: var(--text-white) !important;
 }
 
-/* 3. Cards & Projects */
+/* 3. Cards */
 .glass-card {
   background: var(--bg-card);
   padding: 30px;
   border-radius: 12px;
   border: 1px solid rgba(100, 255, 218, 0.1);
+  transition: 0.3s;
 }
 
-.project-card h3 {
-  color: var(--text-white) !important;
+.glass-card:hover {
+  border-color: var(--cyan);
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 25px;
+}
+
+.project-icon {
+  font-size: 2.2rem;
+  color: var(--cyan);
   margin-bottom: 15px;
 }
 
 .project-yt-description ul {
   padding-left: 20px;
   color: var(--text-slate) !important;
+  margin-top: 15px;
 }
 
 .project-yt-description li {
@@ -127,17 +167,23 @@ body {
 .skill-block h3 {
   color: var(--cyan) !important;
   font-size: 1.1rem;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 /* 5. Footer */
 .minimal-footer {
   text-align: center;
-  padding: 50px 0;
+  padding: 80px 0 40px;
   color: var(--text-slate) !important;
-  font-size: 0.85rem;
+  font-size: 0.9rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 @media (max-width: 768px) {
   .hero-info-line { flex-direction: column; gap: 10px; }
   .name { font-size: 3rem; }
+  .social-links-container { gap: 25px; }
 }
