@@ -132,7 +132,7 @@ CORS_ALLOWED_ORIGINS = [
 ALLOWED_HOSTS = ['alihala8.pythonanywhere.com','backend-django-ovk4.vercel.app', 'localhost', '127.0.0.1']
 # 2. السماح لمتصفح المستخدم (React) بالوصول للبيانات
 CORS_ALLOWED_ORIGINS = [
-    "https://ali-halayqa.vercel.app",  # رابط موقعك الذي ستحصل عليه من Vercel
+    "https://backend-django-ovk4.vercel.app",  # رابط موقعك الذي ستحصل عليه من Vercel
     "http://localhost:3000",
 ]
 
