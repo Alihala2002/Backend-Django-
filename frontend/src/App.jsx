@@ -13,10 +13,11 @@ function App() {
   const [data, setData] = useState(null);
 
   useEffect(() => {
-    axios.get('https://backend-django-ovk4.vercel.app')
-      .then(res => setData(res.data))
-      .catch(err => console.log("Check if Django is running!", err));
-  }, []);
+  // أضف /api/profile/ في نهاية الرابط
+  axios.get('https://backend-django-ovk4.vercel.app/api/profile/') 
+    .then(res => setData(res.data))
+    .catch(err => console.log("Check if Django is running!", err));
+}, []);
 
   if (!data) return <div className="loading">Loading Ali's Portfolio...</div>;
 
