@@ -75,7 +75,7 @@ function App() {
         <div className="stats-grid">
           <div className="stat-card">
             <span className="stat-value">1</span>
-            <span className="stat-label">YEARS OF PROFESSIONAL EXPERIENCE</span>
+            <span className="stat-label">YEARS OF EXPERIENCE</span>
           </div>
           <div className="stat-card">
             <span className="stat-value">5</span>
