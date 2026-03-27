@@ -60,8 +60,8 @@ function App() {
         <h2 className="section-title">Professional Summary</h2>
         <div className="glass-card summary-card">
           <p>
-            Backend Engineer with deep expertise in **Django** and **Django REST Framework (DRF)**. 
-            Focused on building scalable server-side systems, optimizing API performance with **PostgreSQL**, 
+            Backend Engineer with deep expertise in Django and Django REST Framework (DRF). 
+            Focused on building scalable server-side systems, optimizing API performance with PostgreSQL, 
             and delivering secure, production-ready full-stack solutions.
           </p>
         </div>
