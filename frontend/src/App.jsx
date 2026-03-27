@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { motion } from 'framer-motion';
-// تم إضافة أيقونة FaEnvelope هنا لاستخدامها في قسم الإيميل
 import { 
   FaYoutube, FaGithub, FaLinkedin, FaGraduationCap, 
-  FaMapMarkerAlt, FaCalendarAlt, FaCode, FaTools, FaDatabase, 
-  FaLayerGroup, FaVideo, FaChartLine, FaPaintBrush, FaComments, FaBolt, FaBriefcase, FaEnvelope 
+  FaMapMarkerAlt, FaCalendarAlt, FaCode, FaDatabase, 
+  FaLayerGroup, FaBolt, FaBriefcase, FaEnvelope, FaExternalLinkAlt, FaRocket
 } from 'react-icons/fa';
 import profileImg from './assets/ali_profile.jpeg';
 import './App.css';
@@ -14,41 +13,33 @@ function App() {
   const [data, setData] = useState(null);
 
   useEffect(() => {
-    // تم استخدام رابط الـ Backend الصحيح كما تأكدنا في الصور السابقة لضمان جلب البيانات
+    // التأكد من جلب البيانات من الرابط الصحيح المنشور على Vercel
     axios.get('https://backend-django-ovk4.vercel.app/api/profile/')
       .then(res => setData(res.data))
-      .catch(err => console.log("Check if Django is running!", err));
+      .catch(err => console.log("API Connection Error", err));
   }, []);
 
-  // تظل حالة الـ Loading ظاهرة حتى يتم الاتصال بالـ API بنجاح
-  if (!data) return <div className="loading">Loading Ali's Portfolio...</div>;
+  if (!data) return <div className="loading">Initializing Ali's Environment...</div>;
 
   return (
     <div className="portfolio-container">
-      {/* 1. Hero Section - تم تعديله ليظهر الإيميل بشكل احترافي */}
-      <motion.section initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="hero">
+      
+      {/* 1. HERO SECTION (Updated with CTA Buttons) */}
+      <motion.section 
+        initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
+        className="hero"
+      >
         <div className="profile-wrapper">
           <img src={profileImg} alt="Ali Halayqa" className="profile-pic" />
         </div>
-        <div className="hero-typography">
-          <h1 className="name">{data.name}</h1>
-          
-          {/* قسم الموقع والمسمى الوظيفي */}
-          <div className="hero-info-line">
-            <span><FaBriefcase className="info-icon" /> BACKEND ENGINEER</span>
-            <span><FaMapMarkerAlt className="info-icon" /> HEBRON</span>
-          </div>
-
-          <p className="subtitle">{data.title}</p>
-
-          {/* التعديل الجديد: إضافة أيقونة الإيميل وإيميلك مباشرة أسفل الوصف */}
-          <div className="hero-email-line">
-            <FaEnvelope className="info-icon" />
-            <a href="mailto:ali2002hala@gmail.com" className="email-link">
-              ali2002hala@gmail.com
-            </a>
-          </div>
+        <h1 className="name">{data.name}</h1>
+        <p className="hero-tagline">I build scalable backend systems & APIs using Django.</p>
+        
+        <div className="hero-btns">
+          <a href="#projects" className="btn btn-primary">View Projects</a>
+          <a href="mailto:ali2002hala@gmail.com" className="btn btn-outline">Contact Me</a>
         </div>
+
         <div className="social-links">
           <a href={data.links.github} target="_blank" rel="noreferrer"><FaGithub /></a>
           <a href={data.links.linkedin} target="_blank" rel="noreferrer"><FaLinkedin /></a>
@@ -56,77 +47,103 @@ function App() {
         </div>
       </motion.section>
 
-      {/* بقية الأقسام تظل كما هي لضمان عدم حدوث أي تغييرات غير مقصودة في بقية الموقع */}
-
-      {/* 2. Professional Summary */}
-      <section className="summary-section">
+      {/* 2. PROFESSIONAL SUMMARY (Refined) */}
+      <section className="section-container">
         <h2 className="section-title">Professional Summary</h2>
-        <div className="summary-card">
+        <div className="glass-card summary-card">
           <p>
-            Backend Engineer with hands-on experience in <strong>Django</strong> and <strong>Django REST Framework (DRF)</strong>, 
-            specializing in building scalable RESTful APIs and efficient backend systems.
+            Backend Engineer specializing in <strong>Django & DRF</strong>, focused on building scalable, 
+            high-performance APIs. Passionate about clean architecture, system optimization, 
+            and delivering production-ready backend solutions.
           </p>
         </div>
       </section>
 
-      {/* 3. Overview Section */}
-      <section className="overview-section">
-        <h2 className="section-title">Overview</h2>
-        <div className="stats-grid">
-          <div className="stat-card">
-            <span className="stat-value">1</span>
-            <span className="stat-label">YEARS OF EXPERIENCE</span>
+      {/* 3. EXPERIENCE SECTION (New & Critical) */}
+      <section className="section-container">
+        <h2 className="section-title">Experience</h2>
+        <div className="glass-card experience-card">
+          <div className="exp-header">
+            <h3>Backend Engineer Trainee</h3>
+            <span className="exp-date">2024</span>
           </div>
-          <div className="stat-card">
-            <span className="stat-value">5</span>
-            <span className="stat-label">YEARS OF POST-SECONDARY EDUCATION</span>
+          <p className="exp-company">Flowless | Ramallah</p>
+          <ul className="exp-list">
+            <li>Developed REST APIs using Django for water management systems.</li>
+            <li>Built robust authentication systems and user role management.</li>
+            <li>Optimized database queries and PostgreSQL performance.</li>
+          </ul>
+        </div>
+      </section>
+
+      {/* 4. PROJECTS SECTION (The "Star" of the Show) */}
+      <section id="projects" className="section-container">
+        <h2 className="section-title">Featured Projects</h2>
+        <div className="projects-grid">
+          {/* Project 1 */}
+          <div className="glass-card project-card">
+            <div className="project-icon"><FaRocket /></div>
+            <h3>Flowless Backend</h3>
+            <p>Built scalable REST API using Django & DRF with optimized PostgreSQL queries.</p>
+            <div className="project-links">
+              <a href="#"><FaGithub /> Code</a>
+              <a href="#"><FaExternalLinkAlt /> Demo</a>
+            </div>
           </div>
-          <div className="stat-card">
-            <span className="stat-value">2</span>
-            <span className="stat-label">LANGUAGES</span>
+          {/* Project 2 */}
+          <div className="glass-card project-card">
+            <div className="project-icon"><FaCode /></div>
+            <h3>Portfolio API</h3>
+            <p>Created a dynamic API to manage portfolio content and integrated with React.</p>
+            <div className="project-links">
+              <a href="#"><FaGithub /> Code</a>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* 4. Education Section */}
-      <section className="education-section">
+      {/* 5. SKILLS SECTION (Organized) */}
+      <section className="section-container">
+        <h2 className="section-title">Technical Arsenal</h2>
+        <div className="skills-grid">
+          <div className="skill-category">
+            <h4><FaCode /> Backend</h4>
+            <p>Django, DRF, Python</p>
+          </div>
+          <div className="skill-category">
+            <h4><FaDatabase /> Databases</h4>
+            <p>PostgreSQL, SQLite</p>
+          </div>
+          <div className="skill-category">
+            <h4><FaLayerGroup /> Concepts</h4>
+            <p>REST APIs, OOP, SOLID</p>
+          </div>
+        </div>
+      </section>
+
+      {/* 6. EDUCATION */}
+      <section className="section-container">
         <h2 className="section-title">Education</h2>
-        <div className="education-card">
-          <div className="edu-icon-box"><FaGraduationCap /></div>
+        <div className="glass-card education-card">
+          <FaGraduationCap className="edu-icon" />
           <div className="edu-info">
-            <h3>Bachelor of Computer Systems Engineering</h3>
-            <h4>Birzeit University</h4>
-            <div className="edu-meta">
-              <span><FaMapMarkerAlt /> Palestine, Ramallah</span>
-              <span><FaCalendarAlt /> 09.2020 - 07.2025</span>
-            </div>
+            <h3>Computer Systems Engineering</h3>
+            <p>Birzeit University | 2020 - 2025</p>
           </div>
         </div>
       </section>
 
-      {/* 5. Skills Section */}
-      <section className="skills-section">
-        <h2 className="section-title"><FaBolt style={{marginRight: '10px'}}/> Skills</h2>
-        <div className="skills-container">
-          <div className="skills-block">
-            <h3>Technical Skills</h3>
-            <div className="skills-grid">
-              <div className="skill-item"><FaCode className="s-icon"/> <strong>Programming:</strong> Python, Java, C</div>
-              <div className="skill-item"><FaLayerGroup className="s-icon"/> <strong>Frameworks:</strong> Django, DRF</div>
-              <div className="skill-item"><FaDatabase className="s-icon"/> <strong>Databases:</strong> PostgreSQL, SQLite</div>
-            </div>
-          </div>
-          <div className="skills-block second-block">
-            <h3>Other Skills</h3>
-            <div className="skills-grid">
-              <div className="skill-item"><FaVideo className="s-icon"/> Video Editing (Reels / Shorts)</div>
-              <div className="skill-item"><FaChartLine className="s-icon"/> Content Strategy & Growth</div>
-            </div>
-          </div>
+      {/* 7. CONTACT SECTION */}
+      <section className="section-container contact-section">
+        <h2 className="section-title">Get In Touch</h2>
+        <div className="contact-wrapper">
+          <p>Let's build something amazing together.</p>
+          <a href="mailto:ali2002hala@gmail.com" className="contact-btn">
+            <FaEnvelope /> Send Message
+          </a>
         </div>
       </section>
 
-      {/* التعديل الجديد: تم حذف قسم الـ Footer (سطر الحقوق) بالكامل */}
     </div>
   );
 }
