@@ -39,17 +39,19 @@ function App() {
         </div>
         <p className="subtitle">Specializing in high-performance Backend Systems & RESTful APIs</p>
         
-        <div className="hero-email-line">
-          <FaEnvelope className="info-icon" />
+        {/* قسم الإيميل مع أيقونة مكبرة */}
+        <div className="hero-email-container">
+          <FaEnvelope className="email-icon-large" />
           <a href="mailto:ali2002hala@gmail.com" className="email-link">
             ali2002hala@gmail.com
           </a>
         </div>
 
-        <div className="social-links">
-          <a href={data.links.github} target="_blank" rel="noreferrer"><FaGithub /></a>
-          <a href={data.links.linkedin} target="_blank" rel="noreferrer"><FaLinkedin /></a>
-          <a href={data.links.youtube} target="_blank" rel="noreferrer"><FaYoutube /></a>
+        {/* أيقونات السوشيال ميديا مع مسافات مرتبة */}
+        <div className="social-links-container">
+          <a href={data.links.github} target="_blank" rel="noreferrer" className="social-icon"><FaGithub /></a>
+          <a href={data.links.linkedin} target="_blank" rel="noreferrer" className="social-icon"><FaLinkedin /></a>
+          <a href={data.links.youtube} target="_blank" rel="noreferrer" className="social-icon"><FaYoutube /></a>
         </div>
       </motion.section>
 
@@ -69,14 +71,12 @@ function App() {
       <section className="section-container">
         <h2 className="section-title">Featured Projects</h2>
         <div className="projects-grid">
-          {/* Flowless Project */}
           <div className="glass-card project-card">
             <div className="project-icon"><FaRocket /></div>
             <h3>Flowless Backend</h3>
             <p>Built scalable REST API using Django & DRF with optimized PostgreSQL queries for smart water management.</p>
           </div>
           
-          {/* YouTube Project */}
           <div className="glass-card project-card">
             <div className="project-icon"><FaYoutube /></div>
             <h3>YouTube Content Strategy</h3>
