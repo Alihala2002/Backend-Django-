@@ -7,15 +7,15 @@
   --cyan-dim: rgba(100, 255, 218, 0.1);
   --text-white: #e6f1ff;
   --text-slate: #8892b0;
-  --shadow: 0 10px 30px -15px rgba(2, 12, 27, 0.7);
 }
 
 body {
   margin: 0;
   background-color: var(--bg-dark);
-  color: var(--text-white);
+  color: var(--text-white) !important;
   font-family: 'Inter', sans-serif;
   overflow-x: hidden;
+  line-height: 1.6;
 }
 
 .portfolio-container {
@@ -24,7 +24,7 @@ body {
   padding: 40px 20px;
 }
 
-/* 1. Hero Section - تحسين وحدة المسافات والصورة */
+/* 1. Hero Section - تم فك الالتصاق بزيادة الـ margin-bottom تحت الاسم */
 .hero {
   min-height: 85vh;
   display: flex;
@@ -32,7 +32,6 @@ body {
   justify-content: center;
   align-items: center;
   text-align: center;
-  gap: 20px; /* مسافة عامة بين العناصر الرئيسية */
 }
 
 .profile-pic {
@@ -42,21 +41,22 @@ body {
   object-fit: cover;
   border: 4px solid var(--cyan);
   box-shadow: 0 0 25px rgba(100, 255, 218, 0.3);
-  filter: contrast(110%) brightness(105%); /* تحسين وضوح الصورة */
+  margin-bottom: 25px;
 }
 
 .name {
   font-family: 'Poppins';
   font-size: clamp(40px, 8vw, 70px);
-  color: var(--text-white);
-  margin: 0 0 20px 0; /* مسافة تحت الاسم */
+  color: var(--text-white) !important;
+  /* إضافة مسافة تحت الاسم لمنع التداخل */
+  margin: 0 0 15px 0; 
 }
 
-.hero-info-container {
+.hero-description {
   display: flex;
   flex-direction: column;
-  gap: 15px; /* مسافة بين سطر الوظيفة وسطر الموقع */
-  margin-bottom: 30px; /* مسافة تحت قسم المعلومات */
+  gap: 12px;
+  margin-bottom: 25px;
 }
 
 .info-line {
@@ -64,85 +64,75 @@ body {
   align-items: center;
   justify-content: center;
   gap: 10px;
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: 600;
-  color: var(--cyan);
-  text-transform: uppercase;
-  letter-spacing: 1px;
+  color: var(--cyan) !important;
 }
 
 .subtitle {
-  font-size: 1.25rem;
-  color: var(--text-slate);
+  font-size: 1.2rem;
+  color: var(--text-slate) !important;
   max-width: 650px;
   margin: 0 auto 30px;
 }
 
-/* تنسيق الإيميل */
 .hero-email-container {
   display: flex;
   align-items: center;
-  gap: 12px;
+  justify-content: center;
+  gap: 10px;
   background: var(--cyan-dim);
-  padding: 12px 25px;
+  padding: 10px 20px;
   border-radius: 50px;
   border: 1px solid rgba(100, 255, 218, 0.2);
 }
 
-.email-icon-large {
-  font-size: 1.6rem;
-  color: var(--cyan);
-}
-
 .email-link {
-  color: var(--cyan);
+  color: var(--cyan) !important;
   text-decoration: none;
   font-weight: 600;
-  font-size: 1.1rem;
 }
 
-/* السوشيال */
 .social-links-container {
   display: flex;
-  gap: 40px;
+  gap: 25px;
+  font-size: 1.8rem;
   margin-top: 30px;
 }
 
 .social-icon {
-  color: var(--text-slate);
-  font-size: 2.2rem;
+  color: var(--text-slate) !important;
   transition: 0.3s ease;
 }
 
 .social-icon:hover {
-  color: var(--cyan);
+  color: var(--cyan) !important;
   transform: translateY(-5px);
 }
 
-/* 2. Professional Summary - تحسين الوضوح */
+/* 2. Section Styles */
+.section-container {
+  margin: 80px 0;
+}
+
 .section-title {
   font-family: 'Poppins';
   font-size: 1.8rem;
   border-left: 5px solid var(--cyan);
   padding-left: 15px;
-  margin: 80px 0 30px;
+  margin-bottom: 30px;
   text-transform: uppercase;
-  color: var(--text-white);
+  color: var(--text-white) !important;
 }
 
-.summary-card p {
-  color: var(--text-white); /* تحسين اللون للوضوح */
-  font-size: 1.2rem; /* تكبير الخط */
-  line-height: 1.8;
-  margin: 0;
+/* 3. Cards & Projects */
+.glass-card {
+  background: var(--bg-card);
+  padding: 30px;
+  border-radius: 12px;
+  border: 1px solid rgba(100, 255, 218, 0.1);
 }
 
-.summary-card strong {
-  color: var(--cyan); /* تمييز الكلمات المهمة بالفسفوري */
-  font-weight: 800;
-}
-
-/* 3. Featured Projects - تنسيق اليوتيوب */
 .projects-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -150,18 +140,23 @@ body {
 }
 
 .project-card h3 {
-  color: var(--text-white);
+  color: var(--text-white) !important;
   margin-bottom: 15px;
-  font-size: 1.3rem;
 }
 
-.yt-project {
-  grid-column: span 1; /* الحفاظ على ترتيب الكروت */
+.project-icon {
+  font-size: 2rem;
+  color: var(--cyan);
+}
+
+/* تنسيق الكروت المدمجة لحذف الفراغات */
+.compact-card {
+  padding: 20px 25px; /* تقليل الفراغات الداخلية */
 }
 
 .yt-description ul {
   padding-left: 20px;
-  color: var(--text-slate);
+  color: var(--text-slate) !important;
   margin-top: 15px;
 }
 
@@ -170,7 +165,7 @@ body {
   list-style-type: disc;
 }
 
-/* 4. Skills Grid */
+/* 4. Skills */
 .skills-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -178,35 +173,11 @@ body {
 }
 
 .skill-blockBackend h3, .skill-blockFrontend h3, .skill-blockDatabases h3, .skill-blockTools h3 {
-  color: var(--cyan);
+  color: var(--cyan) !important;
   font-size: 1.1rem;
-  margin-bottom: 10px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
 }
 
-/* 5. Footer */
-.minimal-footer {
-  text-align: center;
-  padding: 100px 0 50px;
-  color: var(--text-slate);
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.glass-card {
-  background: var(--bg-card);
-  padding: 30px;
-  border-radius: 12px;
-  border: 1px solid rgba(100, 255, 218, 0.1);
-  transition: 0.3s;
-}
-
-.glass-card:hover {
-  border-color: var(--cyan);
-  box-shadow: var(--shadow);
-}
-
+/* Footer & Loading */
 .loading {
   height: 100vh;
   display: flex;
@@ -216,7 +187,16 @@ body {
   color: var(--cyan);
 }
 
+.minimal-footer {
+  text-align: center;
+  padding: 60px 0;
+  color: var(--text-slate) !important;
+  font-size: 0.85rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Responsive */
 @media (max-width: 768px) {
-  .social-links-container { gap: 30px; }
+  .hero-description { flex-direction: column; gap: 10px; }
   .name { font-size: 3rem; }
 }
