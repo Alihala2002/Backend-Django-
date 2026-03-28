@@ -13,7 +13,9 @@ function App() {
   const [data, setData] = useState(null);
 
   useEffect(() => {
+    // تحديث عنوان التبويب برمجياً
     document.title = "Ali Halayqa | Full Stack Developer";
+    
     axios.get('https://backend-django-ovk4.vercel.app/api/profile/')
       .then(res => setData(res.data))
       .catch(err => console.log("Connection Error", err));
@@ -24,7 +26,7 @@ function App() {
   return (
     <div className="portfolio-container">
       
-      {}
+      {/* 1. HERO SECTION - تم فك الالتصاق بين الاسم والوصف */}
       <motion.section 
         initial={{ opacity: 0, y: 20 }} 
         animate={{ opacity: 1, y: 0 }} 
@@ -36,7 +38,7 @@ function App() {
         <div className="hero-typography">
           <h1 className="name">Ali Halayqa</h1>
           
-          <div className="hero-info-container">
+          <div className="hero-description"> {/* هذا القسم تم ترحيله للأسفل */}
             <div className="info-line">
               <FaLaptopCode className="info-icon" /> FULL STACK DEVELOPER
             </div>
@@ -64,11 +66,11 @@ function App() {
         </div>
       </motion.section>
 
-      {/* 2. PROFESSIONAL SUMMARY - تم تحسين الخط ووضوحه */}
+      {/* 2. PROFESSIONAL SUMMARY */}
       <section className="section-container">
         <h2 className="section-title">Professional Summary</h2>
         <div className="glass-card summary-card">
-          <p className="summary-text">
+          <p>
             Full Stack Developer with deep expertise in <strong>Django</strong> and <strong>Django REST Framework (DRF)</strong>. 
             Focused on building robust backend architectures and integrating them with modern <strong>React</strong> frontends. 
             Experienced in optimizing <strong>PostgreSQL</strong> databases and deploying scalable web applications using <strong>Docker</strong>.
@@ -76,18 +78,18 @@ function App() {
         </div>
       </section>
 
-      {/* 3. FEATURED PROJECTS - تم دمج مشروع اليوتيوب */}
+      {/* 3. FEATURED PROJECTS - تم تقليل الفراغات في الكروت القصيرة */}
       <section className="section-container projects-section">
         <h2 className="section-title">Featured Projects</h2>
         <div className="projects-grid">
-          {/* Project 1 */}
-          <div className="glass-card project-card">
+          {/* Project 1 (Compact) */}
+          <div className="glass-card project-card compact-card">
             <div className="project-icon"><FaRocket /></div>
             <h3>Flowless Backend</h3>
             <p>Built scalable REST API using Django & DRF with optimized PostgreSQL queries for smart water management.</p>
           </div>
           
-          {/* Project 2 (YouTube) */}
+          {/* Project 2 (Normal) */}
           <div className="glass-card project-card yt-project">
             <div className="project-icon"><FaYoutube /></div>
             <h3>YouTube Content Strategy</h3>
@@ -103,8 +105,8 @@ function App() {
             </div>
           </div>
 
-          {/* Project 3 */}
-          <div className="glass-card project-card">
+          {/* Project 3 (Compact) */}
+          <div className="glass-card project-card compact-card">
             <div className="project-icon"><FaCode /></div>
             <h3>Full-Stack Portfolio</h3>
             <p>A dynamic application built with React and Django, featuring a custom API for content management and professional UI design.</p>
