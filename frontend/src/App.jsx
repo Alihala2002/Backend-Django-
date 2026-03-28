@@ -21,7 +21,7 @@ function App() {
       .catch(err => console.log("Connection Error", err));
   }, []);
 
-  if (!data) return <div className="loading">Initializing Ali's Environment...</div>;
+  if (!data) return <div className="loading">Loading Ali's Portfolio...</div>;
 
   return (
     <div className="portfolio-container">
@@ -116,7 +116,7 @@ function App() {
 
       {/* 4. TECHNICAL ARSENAL */}
       <section className="section-container">
-        <h2 className="section-title"><FaBolt className="title-icon"/> Technical Arsenal</h2>
+        <h2 className="section-title"><FaBolt className="title-icon"/> Technical Skills</h2>
         <div className="skills-grid">
           <div className="glass-card skill-blockBackend">
             <h3><FaCode /> Backend</h3>
