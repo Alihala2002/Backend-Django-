@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import { 
   FaYoutube, FaGithub, FaLinkedin, FaGraduationCap, 
   FaMapMarkerAlt, FaCode, FaDatabase, 
-  FaLayerGroup, FaBolt, FaBriefcase, FaEnvelope, FaRocket, FaTools 
+  FaLayerGroup, FaBolt, FaBriefcase, FaEnvelope, FaRocket, FaTools, FaLaptopCode 
 } from 'react-icons/fa';
 import profileImg from './assets/ali_profile.jpeg';
 import './App.css';
@@ -13,12 +13,15 @@ function App() {
   const [data, setData] = useState(null);
 
   useEffect(() => {
+    // تحديث عنوان التبويب برمجياً
+    document.title = "Ali Halayqa | Full Stack Developer";
+    
     axios.get('https://backend-django-ovk4.vercel.app/api/profile/')
       .then(res => setData(res.data))
       .catch(err => console.log("Connection Error", err));
   }, []);
 
-  if (!data) return <div className="loading">Initializing Ali's Environment...</div>;
+  if (!data) return <div className="loading">Loading Ali's Portfolio...</div>;
 
   return (
     <div className="portfolio-container">
@@ -32,14 +35,15 @@ function App() {
         <div className="profile-wrapper">
           <img src={profileImg} alt="Ali Halayqa" className="profile-pic" />
         </div>
-        <h1 className="name">{data.name}</h1>
+        <h1 className="name">Ali Halayqa</h1>
         <div className="hero-info-line">
-          <span><FaBriefcase className="info-icon" /> SOFTWARE ENGINEER</span>
-          <span><FaMapMarkerAlt className="info-icon" /> HEBRON</span>
+          <span><FaLaptopCode className="info-icon" /> FULL STACK DEVELOPER</span>
+          <span><FaMapMarkerAlt className="info-icon" /> Palestine - Hebron</span>
         </div>
-        <p className="subtitle">Specializing in high-performance Backend Systems & RESTful APIs</p>
+        <p className="subtitle">
+          Building scalable backend systems & seamless user experiences with Django & React.
+        </p>
         
-        {/* قسم الإيميل مع أيقونة مكبرة */}
         <div className="hero-email-container">
           <FaEnvelope className="email-icon-large" />
           <a href="mailto:ali2002hala@gmail.com" className="email-link">
@@ -47,7 +51,6 @@ function App() {
           </a>
         </div>
 
-        {/* أيقونات السوشيال ميديا مع مسافات مرتبة */}
         <div className="social-links-container">
           <a href={data.links.github} target="_blank" rel="noreferrer" className="social-icon"><FaGithub /></a>
           <a href={data.links.linkedin} target="_blank" rel="noreferrer" className="social-icon"><FaLinkedin /></a>
@@ -60,9 +63,9 @@ function App() {
         <h2 className="section-title">Professional Summary</h2>
         <div className="glass-card summary-card">
           <p>
-            Backend Engineer with deep expertise in <strong>Django</strong> and <strong>Django REST Framework (DRF)</strong>. 
-            Focused on building scalable server-side systems, optimizing API performance with <strong>PostgreSQL</strong>, 
-            and delivering secure, production-ready full-stack solutions.
+            Full Stack Developer with deep expertise in <strong>Django</strong> and <strong>Django REST Framework (DRF)</strong>. 
+            Focused on building robust backend architectures and integrating them with modern <strong>React</strong> frontends. 
+            Experienced in optimizing <strong>PostgreSQL</strong> databases and deploying scalable web applications using <strong>Docker</strong>.
           </p>
         </div>
       </section>
@@ -78,29 +81,24 @@ function App() {
           </div>
           
           <div className="glass-card project-card">
-            <div className="project-icon"><FaYoutube /></div>
-            <h3>YouTube Content Strategy</h3>
-            <div className="project-yt-description">
-              <p>Developed and grew a YouTube channel reaching over 85,000 subscribers.</p>
-              <ul>
-                <li>Created engaging comedy and reaction-based videos using advanced editing techniques.</li>
-                <li>Applied transformative editing to ensure originality and added creative value to sourced content.</li>
-                <li>Designed storytelling-driven content to increase audience retention and engagement.</li>
-                <li>Managed content strategy, publishing schedule, and audience interaction.</li>
-                <li>Analyzed video performance to optimize reach and improve future content.</li>
-              </ul>
-            </div>
+            <div className="project-icon"><FaCode /></div>
+            <h3>Full-Stack Portfolio</h3>
+            <p>A dynamic application built with React and Django, featuring a custom API for content management and professional UI design.</p>
           </div>
         </div>
       </section>
 
-      {/* 4. TECHNICAL SKILLS */}
+      {/* 4. TECHNICAL ARSENAL */}
       <section className="section-container">
-        <h2 className="section-title"><FaBolt className="title-icon"/> Technical skills</h2>
+        <h2 className="section-title"><FaBolt className="title-icon"/> Technical Arsenal</h2>
         <div className="skills-grid">
           <div className="glass-card skill-block">
             <h3><FaCode /> Backend</h3>
             <p>Django, DRF, Python</p>
+          </div>
+          <div className="glass-card skill-block">
+            <h3><FaLaptopCode /> Frontend</h3>
+            <p>React, HTML5, CSS3, JS</p>
           </div>
           <div className="glass-card skill-block">
             <h3><FaDatabase /> Databases</h3>
@@ -108,11 +106,7 @@ function App() {
           </div>
           <div className="glass-card skill-block">
             <h3><FaTools /> Tools</h3>
-            <p>Docker, Git</p>
-          </div>
-          <div className="glass-card skill-block">
-            <h3><FaLayerGroup /> Concepts</h3>
-            <p>REST APIs, OOP, SOLID</p>
+            <p>Docker, Git, Vercel</p>
           </div>
         </div>
       </section>
@@ -130,7 +124,7 @@ function App() {
       </section>
 
       <footer className="minimal-footer">
-        <p>© 2026 Ali Halayqa | Computer Engineer • Contact: ali2002hala@gmail.com</p>
+        <p>© 2026 Ali Halayqa | Full Stack Developer • Contact: ali2002hala@gmail.com</p>
       </footer>
     </div>
   );
