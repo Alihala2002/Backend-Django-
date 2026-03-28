@@ -24,14 +24,38 @@ body {
   padding: 40px 20px;
 }
 
-/* 1. Hero Section - تم فك الالتصاق بزيادة الـ margin-bottom تحت الاسم */
+/* 1. Hero Section - تم تعديله للخلفية الجديدة وتأثير الكتابة */
 .hero {
-  min-height: 85vh;
+  min-height: 90vh; /* زيادة الارتفاع قليلاً لشعور أفضل */
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
+  position: relative; /* ضروري لطبقة الـ Overlay */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: var(--text-white) !important; /* ضمان بقاء النص أبيض */
+}
+
+/* طبقة داكنة فوق صورة الخلفية لزيادة تباين النص */
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(2, 12, 27, 0.7); /* لون داكن شفاف */
+  z-index: 1; /* تحت المحتوى */
+}
+
+.hero-content-wrapper {
+  position: relative;
+  z-index: 2; /* فوق الـ Overlay */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .profile-pic {
@@ -41,15 +65,36 @@ body {
   object-fit: cover;
   border: 4px solid var(--cyan);
   box-shadow: 0 0 25px rgba(100, 255, 218, 0.3);
-  margin-bottom: 25px;
+  margin-bottom: 30px;
 }
 
 .name {
   font-family: 'Poppins';
   font-size: clamp(40px, 8vw, 70px);
   color: var(--text-white) !important;
-  /* إضافة مسافة تحت الاسم لمنع التداخل */
-  margin: 0 0 15px 0; 
+  margin: 0 0 10px 0;
+}
+
+/* تنسيق تأثير الكتابة (Typing Effect Styles) */
+.hero-typed-container {
+  margin-bottom: 25px;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--cyan) !important; /* لون فسفوري جاف */
+  letter-spacing: 1px;
+}
+
+.typed-cursor {
+  font-weight: 200;
+  opacity: 1;
+  animation: blink 0.7s infinite; /* تأثير وامض */
+  margin-left: 5px;
+}
+
+/* حركة وميض المؤشر */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
 }
 
 .hero-description {
@@ -66,13 +111,13 @@ body {
   gap: 10px;
   font-size: 1rem;
   font-weight: 600;
-  color: var(--cyan) !important;
+  color: var(--text-white) !important; /* بقاء المعلومات بيضاء */
 }
 
 .subtitle {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   color: var(--text-slate) !important;
-  max-width: 650px;
+  max-width: 600px;
   margin: 0 auto 30px;
 }
 
@@ -110,93 +155,28 @@ body {
   transform: translateY(-5px);
 }
 
-/* 2. Section Styles */
-.section-container {
-  margin: 80px 0;
-}
+/* 2. Common Sections */
+.section-container { margin: 80px 0; }
+.section-title { font-family: 'Poppins'; font-size: 1.8rem; border-left: 5px solid var(--cyan); padding-left: 15px; margin-bottom: 30px; text-transform: uppercase; color: var(--text-white) !important; }
 
-.section-title {
-  font-family: 'Poppins';
-  font-size: 1.8rem;
-  border-left: 5px solid var(--cyan);
-  padding-left: 15px;
-  margin-bottom: 30px;
-  text-transform: uppercase;
-  color: var(--text-white) !important;
-}
-
-/* 3. Cards & Projects */
-.glass-card {
-  background: var(--bg-card);
-  padding: 30px;
-  border-radius: 12px;
-  border: 1px solid rgba(100, 255, 218, 0.1);
-}
-
-.projects-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 25px;
-}
-
-.project-card h3 {
-  color: var(--text-white) !important;
-  margin-bottom: 15px;
-}
-
-.project-icon {
-  font-size: 2rem;
-  color: var(--cyan);
-}
-
-/* تنسيق الكروت المدمجة لحذف الفراغات */
-.compact-card {
-  padding: 20px 25px; /* تقليل الفراغات الداخلية */
-}
-
-.yt-description ul {
-  padding-left: 20px;
-  color: var(--text-slate) !important;
-  margin-top: 15px;
-}
-
-.yt-description li {
-  margin-bottom: 8px;
-  list-style-type: disc;
-}
+/* 3. Cards */
+.glass-card { background: var(--bg-card); padding: 30px; border-radius: 12px; border: 1px solid rgba(100, 255, 218, 0.1); }
+.projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px; }
+.project-card h3 { color: var(--text-white) !important; margin-bottom: 15px; }
+.project-icon { font-size: 2rem; color: var(--cyan); }
+.yt-description ul { padding-left: 20px; color: var(--text-slate) !important; margin-top: 15px; }
+.yt-description li { margin-bottom: 8px; list-style-type: disc; }
 
 /* 4. Skills */
-.skills-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 20px;
-}
+.skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
+.skill-blockBackend h3, .skill-blockFrontend h3, .skill-blockDatabases h3, .skill-blockTools h3 { color: var(--cyan) !important; font-size: 1.1rem; }
 
-.skill-blockBackend h3, .skill-blockFrontend h3, .skill-blockDatabases h3, .skill-blockTools h3 {
-  color: var(--cyan) !important;
-  font-size: 1.1rem;
-}
+/* 5. Footer & Loading */
+.minimal-footer { text-align: center; padding: 60px 0; color: var(--text-slate) !important; font-size: 0.85rem; border-top: 1px solid rgba(255, 255, 255, 0.05); }
+.loading { height: 100vh; display: flex; justify-content: center; align-items: center; background-color: var(--bg-dark); color: var(--cyan); }
 
-/* Footer & Loading */
-.loading {
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: var(--bg-dark);
-  color: var(--cyan);
-}
-
-.minimal-footer {
-  text-align: center;
-  padding: 60px 0;
-  color: var(--text-slate) !important;
-  font-size: 0.85rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-/* Responsive */
 @media (max-width: 768px) {
   .hero-description { flex-direction: column; gap: 10px; }
   .name { font-size: 3rem; }
+  .hero-typed-container { font-size: 1.1rem; }
 }
