@@ -6,14 +6,61 @@ import {
   FaMapMarkerAlt, FaCode, FaDatabase, 
   FaLayerGroup, FaBolt, FaBriefcase, FaEnvelope, FaRocket, FaTools, FaLaptopCode 
 } from 'react-icons/fa';
+// استيراد صورة الخلفية الجديدة وصورة الملف الشخصي
+import heroBgImg from './assets/laptop_code_bg.jpg'; 
 import profileImg from './assets/ali_profile.jpeg';
 import './App.css';
 
 function App() {
   const [data, setData] = useState(null);
+  const [typedText, setTypedText] = useState('');
+  // قائمة النصوص الديناميكية التي طلبتها
+  const roles = [
+    "Full stack developer",
+    "Django Specialist",
+    "Content creator"
+  ];
+  const [roleIndex, setRoleIndex] = useState(0);
+  const [charIndex, setCharIndex] = useState(0);
+  const [isDeleting, setIsDeleting] = useState(false);
 
+  // تأثير الكتابة الديناميكي (Typing Effect Logic)
   useEffect(() => {
-    // تحديث عنوان التبويب برمجياً
+    if (!data) return; // انتظر حتى جلب البيانات الأساسية
+
+    const currentRole = roles[roleIndex];
+    let typingSpeed = 100; // سرعة الكتابة الافتراضية
+
+    if (isDeleting) {
+      typingSpeed /= 2; // سرعة الحذف أسرع
+    }
+
+    // إذا انتهى النص وكان ينتظر
+    if (!isDeleting && charIndex === currentRole.length) {
+      typingSpeed = 2000; // انتظر ثانيتين قبل البدء بالحذف
+      setIsDeleting(true);
+    } 
+    // إذا انتهى الحذف وبدأ النص التالي
+    else if (isDeleting && charIndex === 0) {
+      setIsDeleting(false);
+      setRoleIndex((prevIndex) => (prevIndex + 1) % roles.length); // الانتقال للنص التالي ودورة لا نهائية
+      typingSpeed = 500;
+    }
+
+    const timer = setTimeout(() => {
+      setTypedText(
+        isDeleting
+          ? currentRole.substring(0, charIndex - 1)
+          : currentRole.substring(0, charIndex + 1)
+      );
+      setCharIndex((prevIndex) => prevIndex + (isDeleting ? -1 : 1));
+    }, typingSpeed);
+
+    return () => clearTimeout(timer); // تنظيف المؤقت
+  }, [charIndex, isDeleting, roleIndex, roles, data]);
+
+  // جلب البيانات الأساسية وتحديث عنوان التبويب
+  useEffect(() => {
     document.title = "Ali Halayqa | Full Stack Developer";
     
     axios.get('https://backend-django-ovk4.vercel.app/api/profile/')
@@ -21,52 +68,64 @@ function App() {
       .catch(err => console.log("Connection Error", err));
   }, []);
 
-  if (!data) return <div className="loading">Loading Ali's Portfolio...</div>;
+  if (!data) return <div className="loading">Initializing Ali's Environment...</div>;
 
   return (
     <div className="portfolio-container">
       
-      {/* 1. HERO SECTION - تم فك الالتصاق بين الاسم والوصف */}
+      {/* 1. HERO SECTION - مع الخلفية الجديدة وتأثير الكتابة */}
       <motion.section 
-        initial={{ opacity: 0, y: 20 }} 
-        animate={{ opacity: 1, y: 0 }} 
+        initial={{ opacity: 0 }} 
+        animate={{ opacity: 1 }} 
         className="hero"
+        style={{ backgroundImage: `url(${heroBgImg})` }} // فرض الخلفية الجديدة
       >
-        <div className="profile-wrapper">
-          <img src={profileImg} alt="Ali Halayqa" className="profile-pic" />
-        </div>
-        <div className="hero-typography">
-          <h1 className="name">Ali Halayqa</h1>
+        <div className="hero-overlay"></div> {/* طبقة داكنة فوق الصورة للوضوح */}
+        
+        <div className="hero-content-wrapper">
+          <div className="profile-wrapper">
+            <img src={profileImg} alt="Ali Halayqa" className="profile-pic" />
+          </div>
           
-          <div className="hero-description"> {/* هذا القسم تم ترحيله للأسفل */}
-            <div className="info-line">
-              <FaLaptopCode className="info-icon" /> FULL STACK DEVELOPER
+          <div className="hero-typography">
+            <h1 className="name">Hi, I'm Ali Halayqa</h1>
+            
+            {/* هنا يظهر تأثير الكتابة الديناميكي */}
+            <div className="hero-typed-container">
+              <span className="typed-text">{typedText}</span>
+              <span className="typed-cursor">|</span> {/* مؤشر الكتابة الوامض */}
             </div>
-            <div className="info-line">
-              <FaMapMarkerAlt className="info-icon" /> Palestine - Hebron
+
+            <div className="hero-description">
+              <div className="info-line">
+                <FaBriefcase className="info-icon" /> SOFTWARE ENGINEER
+              </div>
+              <div className="info-line">
+                <FaMapMarkerAlt className="info-icon" /> Palestine - Hebron
+              </div>
             </div>
+
+            <p className="subtitle">
+              Specialized in Django, REST APIs, and scalable backend architectures.
+            </p>
+          </div>
+          
+          <div className="hero-email-container">
+            <FaEnvelope className="email-icon-large" />
+            <a href="mailto:ali2002hala@gmail.com" className="email-link">
+              ali2002hala@gmail.com
+            </a>
           </div>
 
-          <p className="subtitle">
-            Building scalable backend systems & seamless user experiences with Django & React.
-          </p>
-        </div>
-        
-        <div className="hero-email-container">
-          <FaEnvelope className="email-icon-large" />
-          <a href="mailto:ali2002hala@gmail.com" className="email-link">
-            ali2002hala@gmail.com
-          </a>
-        </div>
-
-        <div className="social-links-container">
-          <a href={data.links.github} target="_blank" rel="noreferrer" className="social-icon"><FaGithub /></a>
-          <a href={data.links.linkedin} target="_blank" rel="noreferrer" className="social-icon"><FaLinkedin /></a>
-          <a href={data.links.youtube} target="_blank" rel="noreferrer" className="social-icon"><FaYoutube /></a>
+          <div className="social-links-container">
+            <a href={data.links.github} target="_blank" rel="noreferrer" className="social-icon"><FaGithub /></a>
+            <a href={data.links.linkedin} target="_blank" rel="noreferrer" className="social-icon"><FaLinkedin /></a>
+            <a href={data.links.youtube} target="_blank" rel="noreferrer" className="social-icon"><FaYoutube /></a>
+          </div>
         </div>
       </motion.section>
 
-      {/* 2. PROFESSIONAL SUMMARY */}
+      {/* 2. PROFESSIONAL SUMMARY - تم الإبقاء عليه كما هو */}
       <section className="section-container">
         <h2 className="section-title">Professional Summary</h2>
         <div className="glass-card summary-card">
@@ -78,18 +137,16 @@ function App() {
         </div>
       </section>
 
-      {/* 3. FEATURED PROJECTS - تم تقليل الفراغات في الكروت القصيرة */}
-      <section className="section-container projects-section">
+      {/* 3. FEATURED PROJECTS - تم الإبقاء عليه كما هو */}
+      <section className="section-container">
         <h2 className="section-title">Featured Projects</h2>
         <div className="projects-grid">
-          {/* Project 1 (Compact) */}
           <div className="glass-card project-card compact-card">
             <div className="project-icon"><FaRocket /></div>
             <h3>Flowless Backend</h3>
             <p>Built scalable REST API using Django & DRF with optimized PostgreSQL queries for smart water management.</p>
           </div>
           
-          {/* Project 2 (Normal) */}
           <div className="glass-card project-card yt-project">
             <div className="project-icon"><FaYoutube /></div>
             <h3>YouTube Content Strategy</h3>
@@ -105,7 +162,6 @@ function App() {
             </div>
           </div>
 
-          {/* Project 3 (Compact) */}
           <div className="glass-card project-card compact-card">
             <div className="project-icon"><FaCode /></div>
             <h3>Full-Stack Portfolio</h3>
@@ -114,9 +170,9 @@ function App() {
         </div>
       </section>
 
-      {/* 4. TECHNICAL ARSENAL */}
+      {/* 4. TECHNICAL ARSENAL - تم الإبقاء عليه كما هو */}
       <section className="section-container">
-        <h2 className="section-title"><FaBolt className="title-icon"/> Technical Skills</h2>
+        <h2 className="section-title"><FaBolt className="title-icon"/> Technical Arsenal</h2>
         <div className="skills-grid">
           <div className="glass-card skill-blockBackend">
             <h3><FaCode /> Backend</h3>
@@ -137,7 +193,7 @@ function App() {
         </div>
       </section>
 
-      {/* 5. EDUCATION */}
+      {/* 5. EDUCATION - تم الإبقاء عليه كما هو */}
       <section className="section-container">
         <h2 className="section-title">Education</h2>
         <div className="glass-card education-card">
